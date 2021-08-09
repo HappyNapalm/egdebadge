@@ -9,10 +9,6 @@ first_display = True
 
 
 while True:
-
-    #check if we are accelerating.
-    name = str(pybadger._check_for_movement())
-
     if pybadger.button.a:
         pybadger.show_business_card(image_name="supercon.bmp", name_string="Changeme in code.py", name_scale=1,
                                     email_string_one="myemail@hackaday.io",
@@ -20,5 +16,15 @@ while True:
     elif pybadger.button.b:
         pybadger.show_qr_code(data="https://hackaday.io/superconference/")
     elif pybadger.button.start or first_display:
-        pybadger.show_badge(name_string=name, hello_scale=2, my_name_is_scale=2, name_scale=2)
+        
+        #check if we are accelerating.
+        display_x = str(pybadger.acceleration.x)
+        display_y = str(pybadger.acceleration.y)
+        display_z = str(pybadger.acceleration.z)
+
+        #format the info to print
+        name = display_x + " " + display_y + " " + display_z
+
+
+        pybadger.show_badge(name_string=name, hello_scale=1, my_name_is_scale=1, name_scale=1)
         first_display = False
